@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router"
 function MovieForm() {
-  const {id}=useParams()
+  const { id } = useParams()
   const [formData, setFormData] = useState({
     Title: "",
     Genre: "",
@@ -19,26 +19,26 @@ function MovieForm() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-const navigate=useNavigate()
-if(id){
-  const Fetchdata=()=>{
-    axios.get(`${import.meta.env.VITE_URL}movie/${id}`,{
-      headers:{
-        "Content-Type": "application/json",
-        token:`Bearer ${localStorage.getItem('Token')}`
-      }
-    })
-    .then((res)=>{
-        setFormData(res.data.Movies)
-    })
-    .catch((err)=>{
-        console.log(err)
-    })
+  const navigate = useNavigate()
+  if (id) {
+    const Fetchdata = () => {
+      axios.get(`${import.meta.env.VITE_URL}movie/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          token: `Bearer ${localStorage.getItem('Token')}`
+        }
+      })
+        .then((res) => {
+          setFormData(res.data.Movies)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+    useEffect(() => {
+      Fetchdata()
+    }, [])
   }
-  useEffect(()=>{
-    Fetchdata()
-  },[])
-}
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
@@ -47,34 +47,34 @@ if(id){
       setError("All fields are required.");
       return;
     }
-    
-    if(!id){
-      axios.post(`${import.meta.env.VITE_URL}movie`,formData,{
-        headers:{
+
+    if (!id) {
+      axios.post(`${import.meta.env.VITE_URL}movie`, formData, {
+        headers: {
           'Content-Type': 'application/json',
-          token:`Bearer ${localStorage.getItem('Token')} `
-      },
+          token: `Bearer ${localStorage.getItem('Token')} `
+        },
       }
-      ).then((res)=>{
+      ).then((res) => {
         navigate('/')
-      })  
-      .catch((er)=>{
-          console.log(er);
       })
+        .catch((er) => {
+          console.log(er);
+        })
     }
-    else{
-      axios.put(`${import.meta.env.VITE_URL}movie/${id}`,formData,{
-        headers:{
+    else {
+      axios.put(`${import.meta.env.VITE_URL}movie/${id}`, formData, {
+        headers: {
           'Content-Type': 'application/json',
-          token:`Bearer ${localStorage.getItem('Token')} `
-      },
+          token: `Bearer ${localStorage.getItem('Token')} `
+        },
       }
-      ).then((res)=>{
+      ).then((res) => {
         navigate('/')
-      })  
-      .catch((er)=>{
-          console.log(er);
       })
+        .catch((er) => {
+          console.log(er);
+        })
     }
 
     setFormData({
