@@ -10,17 +10,17 @@ import Private from './private'
 const Allroutes = () => {
   return (
     <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/About" element={<About />} />
-            <Route path="/Signup" element={<SignUp />} />
-            <Route path="/Login" element={<LoginPage />} />
-            <Route path="/users" element={
-              <Private>
-              <User />
-              </Private>
-              } />
-              <Route path="/Signup/:id" element={<SignUp />} />
-            
+      <Route path="/" element={<Home />} />
+      <Route path="/About" element={<About />} />
+      <Route path="/Signup" element={<SignUp />} />
+      <Route path="/Login" element={<LoginPage />} />
+      <Route path="/users" element={
+        <Private>
+          <User />
+        </Private>
+      } />
+      <Route path="/Signup/:id" element={<SignUp />} />
+
     </Routes>
   )
 }
